@@ -496,6 +496,7 @@ class Betfair(object):
             {'locale': locale, 'fromRecord': from_record, 'recordCount': record_count,
              'itemDateRange': item_date_range, 'includeItem': include_item, 'wallet': wallet},
             model=models.AccountStatementReport,
+            url=self.account_url,
         )
 
     @utils.requires_login
