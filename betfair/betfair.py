@@ -15,7 +15,6 @@ from betfair import utils
 from betfair import models
 from betfair import exceptions
 
-
 IDENTITY_URLS = collections.defaultdict(
     lambda: 'https://identitysso.betfair.com/api/',
     italy='https://identitysso.betfair.it/api/',
@@ -401,7 +400,7 @@ class Betfair(object):
         )
 
     @utils.requires_login
-    def place_orders(self, market_id, instructions, customer_ref=None):
+    def place_orders(self, market_id, instructions, customer_ref=None, customer_strategy_ref=None):
         """Place new orders into market. This operation is atomic in that all
         orders will be placed or none will be placed.
 
@@ -412,7 +411,8 @@ class Betfair(object):
         return self.make_api_request(
             'Sports',
             'placeOrders',
-            {'marketId': market_id, 'instructions': instructions, 'customerRef': customer_ref},
+            {'marketId': market_id, 'instructions': instructions, 'customerRef': customer_ref,
+             'customerStrategyRef': customer_strategy_ref},
             model=models.PlaceExecutionReport,
         )
 
