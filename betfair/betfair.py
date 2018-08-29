@@ -21,8 +21,8 @@ IDENTITY_URLS = collections.defaultdict(
 )
 
 ACCOUNT_URLS = collections.defaultdict(
-    lambda: 'https://developers.betfair.com/api.betfair.com/exchange/account/json-rpc/v1',
-    italy='https://developers.betfair.it/api.betfair.com/exchange/account/json-rpc/v1',
+    lambda: 'https://api.betfair.com/exchange/account/json-rpc/v1',
+    italy='https://api.betfair.it/exchange/account/json-rpc/v1',
 )
 
 API_URLS = collections.defaultdict(
@@ -86,6 +86,7 @@ class Betfair(object):
 
     def make_api_request(self, base, method, params, codes=None, model=None, url=None):
         payload = utils.make_payload(base, method, params)
+#        print utils.model_to_dict(payload)
         response = self.session.post(
             url if url else self.api_url,
             data=json.dumps(payload, cls=utils.BetfairEncoder),
@@ -94,6 +95,7 @@ class Betfair(object):
         )
         utils.check_status_code(response, codes=codes)
         result = utils.result_or_error(response)
+#        print json.dumps(json.loads(response.text), sort_keys=True, indent=4, separators=(',', ': '))
         return utils.process_result(result, model)
 
     # Authentication methods
