@@ -16,7 +16,7 @@ from betfair import models
 from betfair import exceptions
 
 IDENTITY_URLS = collections.defaultdict(
-    lambda: 'https://identitysso.betfair.com/api/',
+    lambda: 'https://identitysso-cert.betfair.com/api/',
     italy='https://identitysso.betfair.it/api/',
 )
 
